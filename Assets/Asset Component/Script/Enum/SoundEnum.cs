@@ -1,11 +1,10 @@
 ﻿public enum SoundEnum
 {
-    BGM_MainMenu,
     BGM_Ingame,
-    SFX_Ele,
-    SFX_Lift,
-    SFX_Alarm,
-    SFX_Typing,
-    SFX_Click,
+    SFX_Jump,
+    SFX_Crouch,
+    SFX_Obstacle,
+    SFX_ReachPoint,
+    SFX_MoveUI,
     None
 }

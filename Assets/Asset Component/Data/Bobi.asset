@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bobi
   m_EditorClassIdentifier: 
   <PlayerName>k__BackingField: Bobi
-  <PlayerJumpForce>k__BackingField: 18
+  <PlayerJumpForce>k__BackingField: 5

@@ -1,6 +1,6 @@
-using UnityEngine.Audio;
-using System;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using Tsukuyomi.Utilities;
 
 public class AudioManager : MonoBehaviour

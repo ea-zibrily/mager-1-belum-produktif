@@ -1,0 +1,54 @@
+{
+    "name": "MagerInputController",
+    "maps": [
+        {
+            "name": "PlayerInput",
+            "id": "5635df4b-f107-4cc1-bb7a-e78eb5c75eae",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "57a5af33-aee1-44c9-9113-e4d615006243",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "6562ccae-0c70-4a4e-8653-7ae3cc2e8392",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b53a261a-39f5-4fd8-bd83-23a9aba3a93f",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c0611fa-afef-4027-a47c-5ef390dbf18f",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

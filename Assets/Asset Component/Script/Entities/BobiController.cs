@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 #region Require Component
@@ -17,7 +18,7 @@ public class BobiController : MonoBehaviour
     [Header("Controller Component")]
     [SerializeField] private PlayerData playerData;
     [SerializeField] private ColliderData[] colliderData;
-    [SerializeField] private bool isJump;
+    private bool isJump;
     
     [Header("Ground Checker Component")]
     [SerializeField] private Transform groundChecker;
@@ -55,30 +56,49 @@ public class BobiController : MonoBehaviour
     private void Start()
     {
         gameObject.name = playerData.PlayerName;
+        SetOffSizeCollider(colliderData[0].offset, colliderData[0].size);
     }
     
-    private void FixedUpdate()
-    {
-        PlayerJump();
-    }
-    
-    private void Update()
-    {
-        PlayerCrouch();
-    }
 
     #endregion
 
     #region Tsukuyomi Callbacks
-
-    private void PlayerJump()
+    
+    public void PlayerJump(InputAction.CallbackContext button)
     {
-        // Some Logic
+        if (button.performed && IsGround())
+        {
+            myRb.AddForce(Vector2.up * playerData.PlayerJumpForce, ForceMode2D.Impulse);
+        }
+        else if (button.canceled && !IsGround())
+        {
+            myRb.velocity = new Vector2(myRb.velocity.x, myRb.velocity.y * 0.5f);
+        }
     }
     
-    private void PlayerCrouch()
+    public void PlayerCrouch(InputAction.CallbackContext button)
     {
-        // Some Logic
+        if (!IsGround())
+        {
+            return;
+        }
+        
+        if (button.started)
+        {
+            myAnim.SetBool("IsCrouch", true);
+            SetOffSizeCollider(colliderData[1].offset, colliderData[1].size);
+        }
+        else if (button.canceled)
+        {
+            myAnim.SetBool("IsCrouch", false);
+            SetOffSizeCollider(colliderData[0].offset, colliderData[0].size);
+        }
+    }
+    
+    private void SetOffSizeCollider(Vector2 offset, Vector2 size)
+    {
+        myBc.offset = offset;
+        myBc.size = size;
     }
     
     private bool IsGround()
