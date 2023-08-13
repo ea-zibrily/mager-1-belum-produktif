@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3140352432440953443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6072490310236107487}
+  m_Layer: 0
+  m_Name: Ground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6072490310236107487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3140352432440953443}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.13, y: -1.337, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5974333294178060573}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5038529265930550343
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +149,7 @@ GameObject:
   - component: {fileID: 872313219833804365}
   - component: {fileID: 7719973354195188613}
   - component: {fileID: 6351578885890880079}
+  - component: {fileID: 1347299338891212790}
   m_Layer: 0
   m_Name: Bobi
   m_TagString: Player
@@ -139,6 +171,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8961658921559004992}
+  - {fileID: 6072490310236107487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &872313219833804365
@@ -200,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.27590907}
+  m_Offset: {x: -0.15264225, y: 0.22441828}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -211,7 +244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.1774442}
+  m_Size: {x: 1.2035229, y: 3.1265638}
   m_EdgeRadius: 0
 --- !u!114 &6351578885890880079
 MonoBehaviour:
@@ -223,5 +256,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9d757e8c62e7e14fa0c756d412ec490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: aeb282bbb71deea4dae789f0c110a3bc, type: 2}
+  colliderData:
+  - name: Normal
+    offset: {x: -0.15264225, y: 0.22441828}
+    size: {x: 1.2035229, y: 3.1265638}
+  - name: Crouch
+    offset: {x: 0.049045414, y: -0.78962266}
+    size: {x: 1.6068983, y: 1.3225796}
+  isJump: 0
+  groundChecker: {fileID: 6072490310236107487}
+  groundCheckerRadius: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1347299338891212790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495512631502348249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f86b42cee232734190c818337ab2233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
