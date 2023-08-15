@@ -4,5 +4,8 @@
 public class ObstacleData : ScriptableObject
 {
     [field: SerializeField] public string ObstacleName {get; private set;}
+    [field: SerializeField] public float ObstacleMoveSpeed {get; private set;}
+    [field: SerializeField] public float ObstacleMaxMoveSpeed {get; private set;}
+
 
 }

@@ -24,7 +24,7 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
-        // PlayBGM(playSoundEnum);
+        PlayBGM(playSoundEnum);
     }
 
     #endregion

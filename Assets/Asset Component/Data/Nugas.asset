@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10015c3cc664e1a9ada48e9b0fdbab2, type: 3}
   m_Name: Nugas
   m_EditorClassIdentifier: 
-  <ObstacleName>k__BackingField: 
+  <ObstacleName>k__BackingField: Nugas
+  <ObstacleMoveSpeed>k__BackingField: 5
+  <ObstacleMaxMoveSpeed>k__BackingField: 10

@@ -3,8 +3,7 @@
     BGM_Ingame,
     SFX_Jump,
     SFX_Crouch,
-    SFX_Obstacle,
-    SFX_ReachPoint,
-    SFX_MoveUI,
+    SFX_Interact,
+    SFX_Click,
     None
 }

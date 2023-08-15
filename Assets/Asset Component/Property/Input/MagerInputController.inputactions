@@ -29,7 +29,7 @@
                     "name": "",
                     "id": "b53a261a-39f5-4fd8-bd83-23a9aba3a93f",
                     "path": "<Keyboard>/upArrow",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
@@ -40,10 +40,38 @@
                     "name": "",
                     "id": "8c0611fa-afef-4027-a47c-5ef390dbf18f",
                     "path": "<Keyboard>/downArrow",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InterfaceInput",
+            "id": "71d24ab3-4ad2-42b4-a1df-40231ffe68c4",
+            "actions": [
+                {
+                    "name": "InteractPanel",
+                    "type": "Button",
+                    "id": "7c1e6153-7a48-45b8-b8b0-0a1df24be8f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b3dd9cb3-4274-4f84-89af-046ec61a3a7e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractPanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

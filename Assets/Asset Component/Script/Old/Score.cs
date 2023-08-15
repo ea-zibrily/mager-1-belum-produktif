@@ -36,7 +36,6 @@ public class Score : MonoBehaviour
         
         if (Time.timeScale == 0)
         {
-            
             if (score > PlayerPrefs.GetInt(Highscore, 0))
             {
                 PlayerPrefs.SetInt(Highscore, score);
