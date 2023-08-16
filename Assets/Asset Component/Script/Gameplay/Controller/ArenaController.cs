@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class WayController : MonoBehaviour
+public class ArenaController : MonoBehaviour
 {
     #region Variable
 
@@ -17,6 +17,7 @@ public class WayController : MonoBehaviour
 
     [Header("Reference")]
     private ScoreController scoreController;
+    private GameManager gameManager;
     
     #endregion
     
@@ -28,10 +29,15 @@ public class WayController : MonoBehaviour
         wayEndPosition = GameObject.Find("WayPosition_2").transform;
         
         scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
     
     private void Update()
     {
+        if (!gameManager.IsGamePlay)
+        {
+            return;
+        }
         WayMovement();
     }
     

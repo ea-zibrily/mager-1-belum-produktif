@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour, IObserver
 {
@@ -10,9 +12,10 @@ public class GameManager : MonoBehaviour, IObserver
     [Header("Observer Subjects Component")]
     [SerializeField] private ObserverSubjects[] observerSubjects;
     
-    [Header("Game Condition Component")]
-    [SerializeField] private GameObject gameStartPanel;
+    [Header("Other Component")]
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject ambientObject;
+    [SerializeField] private GameObject ScorePanel;
     public bool IsGamePlay { get; private set; }
     
     [Header("Reference")]
@@ -38,6 +41,14 @@ public class GameManager : MonoBehaviour, IObserver
         RemoveSubject();
     }
 
+    private void Start()
+    {
+        IsGamePlay = false;
+        gameOverPanel.SetActive(false);
+        ambientObject.SetActive(false);
+        ScorePanel.SetActive(false);
+    }
+    
     #endregion
 
     #region Tsukuyomi Callbacks
@@ -47,7 +58,7 @@ public class GameManager : MonoBehaviour, IObserver
         switch (gameConditionEnum)
         {
             case GameConditionEnum.Start:
-                GameStart();
+                StartCoroutine(GameStart());
                 break;
             case GameConditionEnum.Over:
                 GameOver();
@@ -74,8 +85,17 @@ public class GameManager : MonoBehaviour, IObserver
         }
     }
     
-    private void GameStart()
+    private IEnumerator GameStart()
     {
+        yield return new WaitForSeconds(0.5f);
+        FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
+        ambientObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
+        ScorePanel.SetActive(true);
+        
+        yield return new WaitForSeconds(0.5f);
         IsGamePlay = true;
     }
     
@@ -87,6 +107,6 @@ public class GameManager : MonoBehaviour, IObserver
         IsGamePlay = false;
         Time.timeScale = 0;
     }
-
+    
     #endregion
 }
