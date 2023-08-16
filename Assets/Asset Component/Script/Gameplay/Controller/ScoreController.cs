@@ -54,7 +54,7 @@ public class ScoreController : MonoBehaviour
     #endregion
 
     #region Tsukuyomi Callbacks
-
+    
     private void InitializeScorePrefs()
     {
         if (!PlayerPrefs.HasKey(HIGH_SCORE_KEY))

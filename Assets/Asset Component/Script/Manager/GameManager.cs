@@ -14,21 +14,20 @@ public class GameManager : MonoBehaviour, IObserver
     
     [Header("Other Component")]
     [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private GameObject ambientObject;
-    [SerializeField] private GameObject ScorePanel;
-    public bool IsGamePlay { get; private set; }
+    public bool IsGamePlay { get; set; }
     
     [Header("Reference")]
     private ScoreController scoreController;
+    private GameStartController gameStartController;
     
     #endregion
-
 
     #region MonoBehaviour Callbacks
 
     private void Awake()
     {
         scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
+        gameStartController = GameObject.Find("GameStartController").GetComponent<GameStartController>();
     }
 
     private void OnEnable()
@@ -45,8 +44,6 @@ public class GameManager : MonoBehaviour, IObserver
     {
         IsGamePlay = false;
         gameOverPanel.SetActive(false);
-        ambientObject.SetActive(false);
-        ScorePanel.SetActive(false);
     }
     
     #endregion
@@ -87,15 +84,7 @@ public class GameManager : MonoBehaviour, IObserver
     
     private IEnumerator GameStart()
     {
-        yield return new WaitForSeconds(0.5f);
-        FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
-        ambientObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
-        FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
-        ScorePanel.SetActive(true);
-        
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         IsGamePlay = true;
     }
     
@@ -103,7 +92,10 @@ public class GameManager : MonoBehaviour, IObserver
     {
         FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
         gameOverPanel.SetActive(true);
+        
+        gameStartController.SetSecondPlay();
         scoreController.SaveHighScore();
+        
         IsGamePlay = false;
         Time.timeScale = 0;
     }
