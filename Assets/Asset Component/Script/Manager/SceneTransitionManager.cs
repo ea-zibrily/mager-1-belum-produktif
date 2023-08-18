@@ -32,9 +32,6 @@ public class SceneTransitionManager : MonoSingleton<SceneTransitionManager>
     public void SceneMoveController()
     {
         FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Click);
-        gameManager.IsGamePlay = true;
-        Time.timeScale = 1;
-        
         OpenCurrentScene();
     }
     
@@ -50,11 +47,11 @@ public class SceneTransitionManager : MonoSingleton<SceneTransitionManager>
     
     private void OpenCurrentScene()
     {
+        Time.timeScale = 1;
         sceneFader.gameObject.SetActive (true);
         
         LeanTween.alpha (sceneFader, 0, 0);
-        LeanTween.alpha (sceneFader, 1, 1f).setOnComplete (() => {
-            // Example for little pause before laoding the next scene
+        LeanTween.alpha (sceneFader, 1, 0.5f).setOnComplete (() => {
             Invoke ("LoadGame", 0.5f);
         });
     }

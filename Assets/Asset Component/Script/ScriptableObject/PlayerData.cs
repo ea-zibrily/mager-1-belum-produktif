@@ -5,4 +5,5 @@ public class PlayerData : ScriptableObject
 {
     [field: SerializeField] public string PlayerName {get; private set;}
     [field: SerializeField] public float PlayerJumpForce {get; private set;}
+    [field: SerializeField] public float PlayerMaxJumpTime {get; private set;}
 }

@@ -18,7 +18,8 @@ public class BobiController : MonoBehaviour
     [Header("Controller Component")]
     [SerializeField] private PlayerData playerData;
     [SerializeField] private ColliderData[] colliderData;
-    
+
+    private float currentJumpTime;
     private bool isJump;
     private bool isCrouch;
     
@@ -69,6 +70,11 @@ public class BobiController : MonoBehaviour
         isCrouch = false;
     }
 
+    private void Update()
+    {
+        PlayerDown();
+    }
+
     #endregion
 
     #region Tsukuyomi Callbacks
@@ -86,8 +92,19 @@ public class BobiController : MonoBehaviour
             FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Jump);
             isJump = true;
         }
-        else if (isJump && IsGround())
+    }
+
+    private void PlayerDown()
+    {
+        if (!isJump)
         {
+            return;
+        }
+        
+        currentJumpTime += Time.deltaTime;
+        if (currentJumpTime >= playerData.PlayerMaxJumpTime)
+        {
+            currentJumpTime = 0f;
             isJump = false;
         }
     }
@@ -99,7 +116,7 @@ public class BobiController : MonoBehaviour
             return;
         }
         
-        if (!IsGround() && isJump)
+        if (isJump)
         {
             return;
         }

@@ -10,10 +10,16 @@ public class PauseController : MonoBehaviour
     
     [SerializeField] private GameObject pausePanel;
     private bool isPausePanelOpen;
+    private GameManager gameManager;
 
     #endregion
 
     #region MonoBehaviour Callbacks
+
+    private void Awake()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
 
     private void Start()
     {
@@ -27,6 +33,11 @@ public class PauseController : MonoBehaviour
 
     public void PauseGame(InputAction.CallbackContext button)
     {
+        if (!gameManager.IsGamePlay)
+        {
+            return;
+        }
+        
         if (button.started)
         {
             FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);

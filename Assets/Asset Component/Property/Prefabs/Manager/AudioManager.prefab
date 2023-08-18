@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7676695422656493264}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,6 +77,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: eb6f46f5fa0f7604a851c3729169e3b5, type: 3}
     priority: 120
     volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SFX_Paper
+    clip: {fileID: 8300000, guid: c0ca7d4cd781f5a42812d29941608617, type: 3}
+    priority: 70
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}

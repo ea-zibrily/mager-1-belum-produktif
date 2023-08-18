@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour, IObserver
     
     [Header("Other Component")]
     [SerializeField] private GameObject gameOverPanel;
-    public bool IsGamePlay { get; set; }
+    [field: SerializeField] public bool IsGamePlay { get; set; }
     
     [Header("Reference")]
     private ScoreController scoreController;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour, IObserver
         scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
         gameStartController = GameObject.Find("GameStartController").GetComponent<GameStartController>();
     }
-
+    
     private void OnEnable()
     {
         InitializeSubject();
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour, IObserver
     {
         RemoveSubject();
     }
-
+    
     private void Start()
     {
         IsGamePlay = false;
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour, IObserver
         switch (gameConditionEnum)
         {
             case GameConditionEnum.Start:
-                StartCoroutine(GameStart());
+                GameStart();
                 break;
             case GameConditionEnum.Over:
                 GameOver();
@@ -82,18 +82,11 @@ public class GameManager : MonoBehaviour, IObserver
         }
     }
     
-    private IEnumerator GameStart()
-    {
-        yield return new WaitForSeconds(0.4f);
-        IsGamePlay = true;
-    }
+    private void GameStart() => IsGamePlay = true;
     
     private void GameOver()
     {
-        FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
         gameOverPanel.SetActive(true);
-        
-        gameStartController.SetSecondPlay();
         scoreController.SaveHighScore();
         
         IsGamePlay = false;

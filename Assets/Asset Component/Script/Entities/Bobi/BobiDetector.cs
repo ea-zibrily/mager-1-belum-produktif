@@ -11,7 +11,8 @@ public class BobiDetector : ObserverSubjects
     {
         if (other.CompareTag("Obstacle"))
         {
-            // NotifyObservers(GameConditionEnum.Over);
+            FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
+            NotifyObservers(GameConditionEnum.Over);
         }
     }
 

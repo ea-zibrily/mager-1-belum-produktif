@@ -47,6 +47,7 @@ public class ScoreController : MonoBehaviour
         {
             return;
         }
+        
         ScoreCount();
         SetMultiplierTime();
     }
@@ -68,7 +69,6 @@ public class ScoreController : MonoBehaviour
         currentScoreTextUI.text = currentScore.ToString(TEXT_SCORE_FORMAT);
     }
     private void SetMultiplierTime() => MultiplierTime += Time.deltaTime * 0.000015f;
-    
     public void SaveHighScore()
     {
         var highScore = PlayerPrefs.GetFloat(HIGH_SCORE_KEY);

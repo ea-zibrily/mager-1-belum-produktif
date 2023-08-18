@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacle
   - GameManager
+  - ObstacleDestroyer
+  - AudioManager
   layers:
   - Default
   - TransparentFX

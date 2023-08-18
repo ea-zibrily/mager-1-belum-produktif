@@ -423,6 +423,9 @@ MonoBehaviour:
   - name: Crouch
     offset: {x: 0.2099635, y: -0.8713145}
     size: {x: 1.9287344, y: 1.3686848}
+  currentJumpTime: 0
+  maxJumpTime: 1.1
+  isJump: 0
   groundChecker: {fileID: 6072490310236107487}
   groundCheckerRadius: 0.5
   groundLayer:

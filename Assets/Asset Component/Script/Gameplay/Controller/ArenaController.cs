@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class ArenaController : MonoBehaviour
 {
     #region Variable
@@ -38,6 +37,7 @@ public class ArenaController : MonoBehaviour
         {
             return;
         }
+        
         WayMovement();
     }
     
