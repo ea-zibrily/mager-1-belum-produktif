@@ -1,0 +1,7 @@
+Compression Format
+GZIP: can work in HTTPS/HTTP
+Brotli: can work only in HTTPS (more secure)
+
+Texture Compression Format
+DXT: for desktop build
+ASTC: for mobile build, but can for both to

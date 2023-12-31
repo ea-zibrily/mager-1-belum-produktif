@@ -1,2 +1,0 @@
-GZIP: can work in HTTPS/HTTP
-Brotli: can work only in HTTPS (more secure)
