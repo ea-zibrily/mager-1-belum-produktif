@@ -1,38 +1,38 @@
 using System;
+using BelumProduktif.Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
 using BelumProduktif.Enum;
-using BelumProduktif.Manager;
 using BelumProduktif.ScriptableObject;
 
 namespace BelumProduktif.Entities.Bobi
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
+    [AddComponentMenu("Tsukuyomi/Bobi/BobiController")]
     public class BobiController : MonoBehaviour
     {
         #region Variable
 
-        [Header("Controller Component")]
-        [SerializeField] [ReadOnly] private PlayerData playerData;
+        [Header("Player Data")]
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private ColliderData[] colliderData;
-
+        
         private float currentJumpTime;
         private bool isJump;
         private bool isCrouch;
     
-        [Header("Ground Checker Component")]
+        [Header("Ground Checker")]
         [SerializeField] private Transform groundChecker;
-        [SerializeField] private float groundCheckerRadius;
+        [SerializeField] [ReadOnlyOnPlay] private float groundCheckerRadius;
         public LayerMask groundLayer;
-    
+        
         [Header("Reference")] 
         private Rigidbody2D myRb;
         private BoxCollider2D myBc;
         private BoxCollider2D myDetectorBc;
         private Animator myAnim;
-        private GameManager gameManager;
     
         #endregion
 
@@ -49,38 +49,37 @@ namespace BelumProduktif.Entities.Bobi
         #endregion
     
         #region MonoBehaviour Callbacks
-
+        
         private void Awake()
         {
             myRb = GetComponent<Rigidbody2D>();
             myBc = GetComponent<BoxCollider2D>();
             myAnim = GetComponentInChildren<Animator>();
+            
             myDetectorBc = transform.GetChild(2).GetComponent<BoxCollider2D>();
-        
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 
         private void Start()
         {
             gameObject.name = playerData.PlayerName;
             SetOffSizeCollider(colliderData[0].offset, colliderData[0].size);
-        
+            
             isJump = false;
             isCrouch = false;
         }
-
+        
         private void Update()
         {
-            PlayerDown();
+            PlayerDown(); 
         }
 
         #endregion
 
         #region Tsukuyomi Callbacks
-    
+        
         public void PlayerJump(InputAction.CallbackContext button)
         {
-            if (!gameManager.IsGamePlay)
+            if (!GameManager.Instance.IsGameStart)
             {
                 return;
             }
@@ -95,7 +94,12 @@ namespace BelumProduktif.Entities.Bobi
 
         public void PlayerCrouch(InputAction.CallbackContext button)
         {
-            if (!gameManager.IsGamePlay || isJump)
+            if (!GameManager.Instance.IsGameStart)
+            {
+                return;
+            }
+
+            if (isJump)
             {
                 return;
             }
@@ -121,7 +125,7 @@ namespace BelumProduktif.Entities.Bobi
             {
                 return;
             }
-        
+            
             currentJumpTime += Time.deltaTime;
             if (currentJumpTime >= playerData.PlayerMaxJumpTime)
             {
@@ -129,7 +133,7 @@ namespace BelumProduktif.Entities.Bobi
                 isJump = false;
             }
         }
-
+        
         private void SetOffSizeCollider(Vector2 offset, Vector2 size)
         {
             myBc.offset = offset;
@@ -138,12 +142,12 @@ namespace BelumProduktif.Entities.Bobi
             myDetectorBc.offset = offset;
             myDetectorBc.size = size;
         }
-    
+        
         private bool IsGround()
         {
             return Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
         }
-
+        
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

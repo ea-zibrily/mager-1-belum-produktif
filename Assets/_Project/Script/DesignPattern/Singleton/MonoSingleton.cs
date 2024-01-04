@@ -30,7 +30,7 @@ namespace BelumProduktif.DesignPattern.Singleton
                 return _instance;
             }
         }
-
+        
         protected virtual void Awake()
         {
             //Singleton method

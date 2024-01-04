@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5639744036392224981}
-  - component: {fileID: 1247919277414845275}
+  - component: {fileID: 7554193584361753767}
   m_Layer: 0
   m_Name: ObstacleGeneratorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5639744036392224981
 Transform:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1247919277414845275
+--- !u!114 &7554193584361753767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4512232886093963986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62869609e6b34b879ec871970261a4bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3be186893a3276a44b815c0cf0479e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSpawn: 1.5
+  minTimeBetweenSpawn: 1.4
   maxTimeBetweenSpawn: 4
   obstaclePrefabs:
   - {fileID: 7878236133559225255, guid: 9fe60047d7674a54daa4ed9deebfdc5e, type: 3}

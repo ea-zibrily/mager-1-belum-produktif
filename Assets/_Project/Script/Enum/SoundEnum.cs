@@ -7,7 +7,6 @@
         SFX_Crouch,
         SFX_Interact,
         SFX_Click,
-        SFX_Paper,
-        None
+        SFX_Paper
     }
 }

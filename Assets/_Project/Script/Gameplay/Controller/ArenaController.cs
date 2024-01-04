@@ -1,8 +1,10 @@
-using BelumProduktif.Manager;
+using System;
+using BelumProduktif.Managers;
 using UnityEngine;
 
 namespace BelumProduktif.Gameplay.Controller
 {
+    [AddComponentMenu("Tsukuyomi/Controller/ArenaController")]
     public class ArenaController : MonoBehaviour
     {
         #region Variable
@@ -10,13 +12,12 @@ namespace BelumProduktif.Gameplay.Controller
         [Header("Way Component")] 
         [SerializeField] private float wayMoveSpeed;
         [SerializeField] private float maxWayMoveSpeed;
-    
+        
         private Transform wayStartPosition;
         private Transform wayEndPosition;
 
         [Header("Reference")]
         private ScoreController scoreController;
-        private GameManager gameManager;
     
         #endregion
     
@@ -28,12 +29,11 @@ namespace BelumProduktif.Gameplay.Controller
             wayEndPosition = GameObject.Find("WayPosition_2").transform;
         
             scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
-            gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
-    
+
         private void Update()
         {
-            if (!gameManager.IsGamePlay)
+            if (!GameManager.Instance.IsGameStart)
             {
                 return;
             }
@@ -44,7 +44,7 @@ namespace BelumProduktif.Gameplay.Controller
         #endregion
     
         #region Tsukuyomi Callbacks
-    
+        
         private void WayMovement()
         {
             IncreaseWayMoveSpeed();

@@ -1,11 +1,11 @@
-using BelumProduktif.DesignPattern.Observer;
-using BelumProduktif.Enum;
-using BelumProduktif.Manager;
+using System;
+using BelumProduktif.Managers;
 using UnityEngine;
 
 namespace BelumProduktif.Entities.Bobi
 {
-    public class BobiDetector : ObserverSubjects
+    [AddComponentMenu("Tsukuyomi/Bobi/BobiDetector")]
+    public class BobiDetector : MonoBehaviour
     {
         #region Collider Callbacks
 
@@ -13,8 +13,7 @@ namespace BelumProduktif.Entities.Bobi
         {
             if (other.CompareTag("Obstacle"))
             {
-                FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
-                NotifyObservers(GameConditionEnum.Over);
+                GameManager.Instance.GameOverEvent();
             }
         }
 

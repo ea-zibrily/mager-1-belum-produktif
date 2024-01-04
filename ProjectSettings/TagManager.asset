@@ -8,6 +8,10 @@ TagManager:
   - GameManager
   - ObstacleDestroyer
   - AudioManager
+  - Arena
+  - GameOverPanel
+  - ObstacleSide
+  - ObstacleUp
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Persistence UI
   - 
   - 
   - 
