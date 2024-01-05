@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildType: Release
   buildDate:
-    day: 31
-    month: 12
-    year: 2023
-  buildNumber: 2
+    day: 5
+    month: 1
+    year: 2024
+  buildNumber: 4

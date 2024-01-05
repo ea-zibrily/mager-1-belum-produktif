@@ -29,10 +29,10 @@ namespace BelumProduktif.Managers
             else
             {
                 //--- Og Fader w LeanTween
-                // StartFader();
+                StartFader();
             
                 //--- Fader w FEEL
-                FeedbackManager.Instance.CallFader();
+                // FeedbackManager.Instance.CallFader();
             }
         }
     
