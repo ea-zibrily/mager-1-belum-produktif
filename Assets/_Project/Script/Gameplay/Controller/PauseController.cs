@@ -15,8 +15,9 @@ namespace BelumProduktif.Gameplay.Controller
         
         [Header("Reference")]
         [SerializeField] private GameObject pausePanel;
-        private Button pauseButton;
-        private bool isPausePanelOpen;
+        
+        private Button _pauseButton;
+        private bool _isPausePanelOpen;
 
         #endregion
 
@@ -24,14 +25,14 @@ namespace BelumProduktif.Gameplay.Controller
 
         private void Awake()
         {
-            pauseButton = pausePanel.GetComponentInChildren<Button>();
+            _pauseButton = pausePanel.GetComponentInChildren<Button>();
         }
 
         private void Start()
         {
             pausePanel.SetActive(false);
-            isPausePanelOpen = false;
-            pauseButton.onClick.AddListener(ClosePausePanel);
+            _isPausePanelOpen = false;
+            _pauseButton.onClick.AddListener(ClosePausePanel);
         }
     
         #endregion
@@ -51,7 +52,7 @@ namespace BelumProduktif.Gameplay.Controller
             }
             
             FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Interact);
-            if (!isPausePanelOpen)
+            if (!_isPausePanelOpen)
             {
                 OpenPausePanel();
             }
@@ -64,14 +65,14 @@ namespace BelumProduktif.Gameplay.Controller
         private void OpenPausePanel()
         {
             pausePanel.SetActive(true);
-            isPausePanelOpen = true;
+            _isPausePanelOpen = true;
             Time.timeScale = 0;
         }
     
         private void ClosePausePanel()
         {
             pausePanel.SetActive(false);
-            isPausePanelOpen = false;
+            _isPausePanelOpen = false;
             Time.timeScale = 1;
         }
     

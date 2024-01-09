@@ -14,8 +14,8 @@ namespace BelumProduktif.Entities.Obstacle
         [SerializeField] private GameObject[] obstaclePrefabs;
         [SerializeField] private Transform[] obstacleSpawnPoint;
     
-        private float currentTimeSpawn;
-        private float currentTimeBetweenSpawn;
+        private float _currentTimeSpawn;
+        private float _currentTimeBetweenSpawn;
     
         #endregion
 
@@ -42,20 +42,20 @@ namespace BelumProduktif.Entities.Obstacle
 
         private void InitializeTimeSpawn()
         {
-            currentTimeSpawn = 0f;
-            currentTimeBetweenSpawn = minTimeBetweenSpawn;
+            _currentTimeSpawn = 0f;
+            _currentTimeBetweenSpawn = minTimeBetweenSpawn;
         }
         
         private void LoopGenerate()
         {
-            currentTimeSpawn += Time.deltaTime;
+            _currentTimeSpawn += Time.deltaTime;
             var randomTimeBetweenSpawn = UnityEngine.Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
         
-            if (currentTimeSpawn >= currentTimeBetweenSpawn)
+            if (_currentTimeSpawn >= _currentTimeBetweenSpawn)
             {
                 GenerateObstacle();
-                currentTimeSpawn = 0f;
-                currentTimeBetweenSpawn = randomTimeBetweenSpawn;
+                _currentTimeSpawn = 0f;
+                _currentTimeBetweenSpawn = randomTimeBetweenSpawn;
             }
         }
       

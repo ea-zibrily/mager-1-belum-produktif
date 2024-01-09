@@ -14,14 +14,14 @@ namespace BelumProduktif.Entities.Obstacle
     
         [Header("Obstacle")]
         [SerializeField] private ObstacleData obstacleData;
-        private float currentObstacleMoveSpeed;
+        private float _currentObstacleMoveSpeed;
 
-        private ObjectPool<ObstacleController> objectPool;
-        public ObjectPool<ObstacleController> ObjectPool { set => objectPool = value; }
+        private ObjectPool<ObstacleController> _objectPool;
+        public ObjectPool<ObstacleController> ObjectPool { set => _objectPool = value; }
     
         [Header("Reference")]
-        private Rigidbody2D obstacleRb;
-        private ScoreController scoreController;
+        private Rigidbody2D _obstacleRb;
+        private ScoreController _scoreController;
     
         #endregion
     
@@ -29,14 +29,14 @@ namespace BelumProduktif.Entities.Obstacle
 
         private void Awake()
         {
-            obstacleRb = GetComponent<Rigidbody2D>();
-            scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
+            _obstacleRb = GetComponent<Rigidbody2D>();
+            _scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
         }
 
         private void Start()
         {
             gameObject.name = obstacleData.ObstacleName;
-            currentObstacleMoveSpeed = obstacleData.ObstacleMoveSpeed;
+            _currentObstacleMoveSpeed = obstacleData.ObstacleMoveSpeed;
         }
         
         private void Update()
@@ -58,24 +58,24 @@ namespace BelumProduktif.Entities.Obstacle
         public void DeactivateObstacle()
         {
             // Reset all obstacle data
-            currentObstacleMoveSpeed = obstacleData.ObstacleMoveSpeed;
-            obstacleRb.velocity = Vector2.zero;
+            _currentObstacleMoveSpeed = obstacleData.ObstacleMoveSpeed;
+            _obstacleRb.velocity = Vector2.zero;
             transform.position = Vector3.zero;
             
             // Release obstacle back to the pool
-            objectPool.Release(this);
+            _objectPool.Release(this);
         }
         
-        private void ObstacleMovement() => obstacleRb.velocity = Vector2.left * currentObstacleMoveSpeed;
+        private void ObstacleMovement() => _obstacleRb.velocity = Vector2.left * _currentObstacleMoveSpeed;
         
-        private void StopObstacleMovement() => obstacleRb.velocity = Vector2.zero;
+        private void StopObstacleMovement() => _obstacleRb.velocity = Vector2.zero;
         
         private void IncreaseObstacleMoveSpeed()
         {
-            currentObstacleMoveSpeed += scoreController.MultiplierTime; 
+            _currentObstacleMoveSpeed += _scoreController.MultiplierTime; 
             if (obstacleData.ObstacleMoveSpeed > obstacleData.ObstacleMaxMoveSpeed)
             {
-                currentObstacleMoveSpeed = obstacleData.ObstacleMaxMoveSpeed;
+                _currentObstacleMoveSpeed = obstacleData.ObstacleMaxMoveSpeed;
             }
         }
         

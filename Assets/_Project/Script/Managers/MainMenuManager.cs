@@ -11,12 +11,14 @@ namespace BelumProduktif.Managers
     {
         #region Variable
         
-        [Header("Reference")]
+        [Header("Interface")]
         [SerializeField] private GameObject mainMenuPanel;
         [SerializeField] private GameObject scorePanel;
 
-        private Button mainMenuButton;
-        private GameStartEventHandler gameStartEventHandler;
+        private Button _mainMenuButton;
+        
+        [Header("Reference")]
+        private GameStartEventHandler _gameStartEventHandler;
 
         #endregion
 
@@ -25,26 +27,26 @@ namespace BelumProduktif.Managers
         private void Awake()
         {
             var mainMenuObject = GameObject.Find("MainMenuPanel").gameObject;
-            gameStartEventHandler = mainMenuObject.GetComponent<GameStartEventHandler>();
-            mainMenuButton = mainMenuObject.GetComponentInChildren<Button>();
+            _gameStartEventHandler = mainMenuObject.GetComponent<GameStartEventHandler>();
+            _mainMenuButton = mainMenuObject.GetComponentInChildren<Button>();
         }
     
         private void OnEnable()
         {
-            gameStartEventHandler.OnGameStart += StartGame;
-            gameStartEventHandler.OnActivateScorePanel += ActivateScorePanel;
+            _gameStartEventHandler.OnGameStart += StartGame;
+            _gameStartEventHandler.OnActivateScorePanel += ActivateScorePanel;
         }
     
         private void OnDisable()
         {
-            gameStartEventHandler.OnGameStart -= StartGame;
-            gameStartEventHandler.OnActivateScorePanel -= ActivateScorePanel;
+            _gameStartEventHandler.OnGameStart -= StartGame;
+            _gameStartEventHandler.OnActivateScorePanel -= ActivateScorePanel;
         }
         
         private void Start()
         {
             InitializeMainMenu();
-            mainMenuButton.onClick.AddListener(OpenGameArena);
+            _mainMenuButton.onClick.AddListener(OpenGameArena);
         }
         
         #endregion

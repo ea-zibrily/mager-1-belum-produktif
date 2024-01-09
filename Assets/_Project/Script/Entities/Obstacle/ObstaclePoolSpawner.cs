@@ -21,12 +21,12 @@ namespace BelumProduktif.Entities.Obstacle
         [SerializeField] private ObstacleController[] obstaclePrefabs;
         [SerializeField] private Transform[] obstacleSpawnPoint;
     
-        private ObjectPool<ObstacleController> obstaclePool;
+        private ObjectPool<ObstacleController> _obstaclePool;
         
-        private int poolCount;
-        private int currentPoolIndex;
-        private float currentTimeSpawn;
-        private float currentTimeBetweenSpawn;
+        private int _poolCount;
+        private int _currentPoolIndex;
+        private float _currentTimeSpawn;
+        private float _currentTimeBetweenSpawn;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace BelumProduktif.Entities.Obstacle
         
         private void Start()
         {
-            obstaclePool = new ObjectPool<ObstacleController>(CreateObstacle, OnGetFromPool, 
+            _obstaclePool = new ObjectPool<ObstacleController>(CreateObstacle, OnGetFromPool, 
                 OnReleaseToPool, OnDestroyPooledObject, true, defaultPoolCapacity, maxPoolSize);
             
             InitializeTimeSpawn();
@@ -58,30 +58,28 @@ namespace BelumProduktif.Entities.Obstacle
         private ObstacleController CreateObstacle()
         {
             var randomObstacle = Random.Range(0, obstaclePrefabs.Length - 1);
-            if (currentPoolIndex == randomObstacle)
+            if (_currentPoolIndex == randomObstacle)
             {
-                if (poolCount < 1)
+                if (_poolCount < 1)
                 {
-                    poolCount++;
+                    _poolCount++;
                 }
                 else
                 {
                     Debug.LogWarning("instantiate 2 same object!");
-                    while (randomObstacle == currentPoolIndex)
+                    while (randomObstacle == _currentPoolIndex)
                     {
                         var repeatRandom = Random.Range(0, obstaclePrefabs.Length - 1);
                         randomObstacle = repeatRandom;
                         Debug.Log($"iterate random value: {randomObstacle}");
                     }
-                    
-                    Debug.LogWarning($"randomize again done lur: {randomObstacle}");
-                    poolCount = 0;
+                    _poolCount = 0;
                 }
             }
             
-            currentPoolIndex = randomObstacle;
+            _currentPoolIndex = randomObstacle;
             var obstacleObject = Instantiate(obstaclePrefabs[randomObstacle], obstacleParent.transform, false);
-            obstacleObject.ObjectPool = obstaclePool;
+            obstacleObject.ObjectPool = _obstaclePool;
             return obstacleObject;
         }
         
@@ -109,20 +107,20 @@ namespace BelumProduktif.Entities.Obstacle
         
         private void InitializeTimeSpawn()
         {
-            currentTimeSpawn = 0f;
-            currentTimeBetweenSpawn = minTimeBetweenSpawn;
+            _currentTimeSpawn = 0f;
+            _currentTimeBetweenSpawn = minTimeBetweenSpawn;
         }
         
         private void LoopGenerate()
         {
-            currentTimeSpawn += Time.deltaTime;
+            _currentTimeSpawn += Time.deltaTime;
             var randomTimeBetweenSpawn = Random.Range(minTimeBetweenSpawn, maxTimeBetweenSpawn);
         
-            if (currentTimeSpawn >= currentTimeBetweenSpawn)
+            if (_currentTimeSpawn >= _currentTimeBetweenSpawn)
             {
                 GenerateObstacle();
-                currentTimeSpawn = 0f;
-                currentTimeBetweenSpawn = randomTimeBetweenSpawn;
+                _currentTimeSpawn = 0f;
+                _currentTimeBetweenSpawn = randomTimeBetweenSpawn;
             }
         }
         
@@ -130,7 +128,7 @@ namespace BelumProduktif.Entities.Obstacle
         {
             var randomSpawnPoint = Random.Range(0, obstacleSpawnPoint.Length - 1);
             
-            var obstacleObject = obstaclePool.Get();
+            var obstacleObject = _obstaclePool.Get();
             obstacleObject.transform.position = obstacleSpawnPoint[randomSpawnPoint].position;
         }
     

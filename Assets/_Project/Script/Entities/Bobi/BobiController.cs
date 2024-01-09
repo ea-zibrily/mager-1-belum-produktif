@@ -19,20 +19,20 @@ namespace BelumProduktif.Entities.Bobi
         [SerializeField] private PlayerData playerData;
         [SerializeField] private ColliderData[] colliderData;
         
-        private float currentJumpTime;
-        private bool isJump;
-        private bool isCrouch;
+        private float _currentJumpTime;
+        private bool _isJump;
+        private bool _isCrouch;
     
         [Header("Ground Checker")]
         [SerializeField] private Transform groundChecker;
         [SerializeField] [ReadOnlyOnPlay] private float groundCheckerRadius;
-        public LayerMask groundLayer;
+        [SerializeField] private LayerMask groundLayer;
         
         [Header("Reference")] 
-        private Rigidbody2D myRb;
-        private BoxCollider2D myBc;
-        private BoxCollider2D myDetectorBc;
-        private Animator myAnim;
+        private Rigidbody2D _myRb;
+        private BoxCollider2D _myBc;
+        private BoxCollider2D _myDetectorBc;
+        private Animator _myAnim;
     
         #endregion
 
@@ -52,11 +52,11 @@ namespace BelumProduktif.Entities.Bobi
         
         private void Awake()
         {
-            myRb = GetComponent<Rigidbody2D>();
-            myBc = GetComponent<BoxCollider2D>();
-            myAnim = GetComponentInChildren<Animator>();
+            _myRb = GetComponent<Rigidbody2D>();
+            _myBc = GetComponent<BoxCollider2D>();
+            _myAnim = GetComponentInChildren<Animator>();
             
-            myDetectorBc = transform.GetChild(2).GetComponent<BoxCollider2D>();
+            _myDetectorBc = transform.GetChild(2).GetComponent<BoxCollider2D>();
         }
 
         private void Start()
@@ -64,8 +64,8 @@ namespace BelumProduktif.Entities.Bobi
             gameObject.name = playerData.PlayerName;
             SetOffSizeCollider(colliderData[0].offset, colliderData[0].size);
             
-            isJump = false;
-            isCrouch = false;
+            _isJump = false;
+            _isCrouch = false;
         }
         
         private void Update()
@@ -84,11 +84,11 @@ namespace BelumProduktif.Entities.Bobi
                 return;
             }
         
-            if (button.performed && IsGround() && !isCrouch)
+            if (button.performed && IsGround() && !_isCrouch)
             {
-                myRb.AddForce(Vector2.up * playerData.PlayerJumpForce, ForceMode2D.Impulse);
+                _myRb.AddForce(Vector2.up * playerData.PlayerJumpForce, ForceMode2D.Impulse);
                 FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Jump);
-                isJump = true;
+                _isJump = true;
             }
         }
 
@@ -99,48 +99,48 @@ namespace BelumProduktif.Entities.Bobi
                 return;
             }
 
-            if (isJump)
+            if (_isJump)
             {
                 return;
             }
         
             if (button.started)
             {
-                myAnim.SetBool("IsCrouch", true);
+                _myAnim.SetBool("IsCrouch", true);
                 FindObjectOfType<AudioManager>().PlayAudio(SoundEnum.SFX_Crouch);
                 SetOffSizeCollider(colliderData[1].offset, colliderData[1].size);
-                isCrouch = true;
+                _isCrouch = true;
             }
             else if (button.canceled)
             {
-                myAnim.SetBool("IsCrouch", false);
+                _myAnim.SetBool("IsCrouch", false);
                 SetOffSizeCollider(colliderData[0].offset, colliderData[0].size);
-                isCrouch = false;
+                _isCrouch = false;
             }
         }
 
         private void PlayerDown()
         {
-            if (!isJump)
+            if (!_isJump)
             {
                 return;
             }
             
-            currentJumpTime += Time.deltaTime;
-            if (currentJumpTime >= playerData.PlayerMaxJumpTime)
+            _currentJumpTime += Time.deltaTime;
+            if (_currentJumpTime >= playerData.PlayerMaxJumpTime)
             {
-                currentJumpTime = 0f;
-                isJump = false;
+                _currentJumpTime = 0f;
+                _isJump = false;
             }
         }
         
         private void SetOffSizeCollider(Vector2 offset, Vector2 size)
         {
-            myBc.offset = offset;
-            myBc.size = size;
+            _myBc.offset = offset;
+            _myBc.size = size;
         
-            myDetectorBc.offset = offset;
-            myDetectorBc.size = size;
+            _myDetectorBc.offset = offset;
+            _myDetectorBc.size = size;
         }
         
         private bool IsGround()

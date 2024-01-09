@@ -16,11 +16,11 @@ namespace BelumProduktif.Managers
         
         [Header("Interface")]
         [SerializeField] private GameObject gameOverPanel;
-        private Button restartButton;
+        private Button _restartButton;
 
         [field: SerializeField, ReadOnlyOnPlay] public bool IsGameStart { get; private set; }
         
-        private bool isHavePlayed;
+        private bool _isHavePlayed;
         public bool IsHavePlayed
         {
             get
@@ -28,11 +28,11 @@ namespace BelumProduktif.Managers
                 if (PlayerPrefs.HasKey(HAVE_PLAYED_KEY))
                 {
                     var havePlayed = PlayerPrefs.GetString(HAVE_PLAYED_KEY) is "True";
-                    isHavePlayed = havePlayed;
+                    _isHavePlayed = havePlayed;
                 }
-                return isHavePlayed;
+                return _isHavePlayed;
             }
-            private set => isHavePlayed = value;
+            private set => _isHavePlayed = value;
         }
 
         private const string HAVE_PLAYED_KEY = "Played";
@@ -46,7 +46,7 @@ namespace BelumProduktif.Managers
         #endregion
 
         [Header("Reference")] 
-        private ScoreController scoreController;
+        private ScoreController _scoreController;
 
         #endregion
 
@@ -55,8 +55,8 @@ namespace BelumProduktif.Managers
         protected override void Awake()
         { 
             base.Awake();
-            restartButton = gameOverPanel.GetComponentInChildren<Button>();
-            scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
+            _restartButton = gameOverPanel.GetComponentInChildren<Button>();
+            _scoreController = GameObject.Find("ScoreController").GetComponent<ScoreController>();
         }
 
         private void OnEnable()
@@ -76,7 +76,7 @@ namespace BelumProduktif.Managers
         private void Start()
         {
             gameOverPanel.SetActive(false);
-            restartButton.onClick.AddListener(RestartGame);
+            _restartButton.onClick.AddListener(RestartGame);
         }
 
         private void OnApplicationQuit()
@@ -117,7 +117,7 @@ namespace BelumProduktif.Managers
             
             yield return new WaitForSeconds(0.25f);
             gameOverPanel.SetActive(true);
-            scoreController.SaveHighScore();
+            _scoreController.SaveHighScore();
             
             Time.timeScale = 0;
         }
